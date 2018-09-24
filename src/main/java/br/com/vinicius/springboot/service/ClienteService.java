@@ -1,6 +1,7 @@
 package br.com.vinicius.springboot.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -18,7 +19,6 @@ public class ClienteService {
 	
 	@Transactional
 	public Cliente insert(Cliente obj) {
-		obj.setId(null);
 		obj = repo.save(obj);
 		return obj;
 	}
@@ -27,4 +27,8 @@ public class ClienteService {
 		return repo.findAll();
 	}
 	
+	public Cliente find(int id) {
+		Optional<Cliente> obj = repo.findById(id);
+		return obj.get();		
+	}
 }
