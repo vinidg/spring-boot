@@ -2,6 +2,8 @@ package br.com.vinicius.springboot.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +28,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value = "/cliente/add", method = RequestMethod.POST)
-	public ResponseEntity<Cliente> add(@RequestBody Cliente cliente){
+	public ResponseEntity<Cliente> add(@RequestBody @Valid Cliente cliente){
 		Cliente clienteSalvo = clienteService.insert(cliente);
 		Cliente find = clienteService.find(clienteSalvo.getId());
 		return ResponseEntity.ok().body(find);
