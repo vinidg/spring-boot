@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +33,17 @@ public class ApiController {
 		Cliente clienteSalvo = clienteService.insert(cliente);
 		Cliente find = clienteService.find(clienteSalvo.getId());
 		return ResponseEntity.ok().body(find);
+	}
+	
+	@RequestMapping(value = "/cliente/find/{clienteId}", method = RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@PathVariable("clienteId") int id) {
+		Cliente cliente = clienteService.find(id);
+		return ResponseEntity.ok().body(cliente);
+	}
+	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public ResponseEntity<String> admin() {
+		return ResponseEntity.ok().body("<b>AREA ADMIN</b>");
 	}
 
 }

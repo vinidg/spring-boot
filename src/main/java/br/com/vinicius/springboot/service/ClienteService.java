@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.repository.ClienteRepositorio;
+import javassist.tools.rmi.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -35,5 +36,15 @@ public class ClienteService {
 	public Cliente find(int id) {
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElse(null);		
+	}
+	
+	public Cliente findByUser(String user) throws ObjectNotFoundException {
+	
+		Cliente obj = repo.findByUser(user);
+		if (obj == null) {
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado! Id: " + ", Tipo: " + Cliente.class.getName());
+		}
+		return obj;
 	}
 }
