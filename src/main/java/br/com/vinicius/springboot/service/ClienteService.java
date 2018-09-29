@@ -5,12 +5,16 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.vinicius.springboot.domain.Cliente;
+import br.com.vinicius.springboot.enums.Perfil;
+import br.com.vinicius.springboot.execeptions.AuthorizationException;
 import br.com.vinicius.springboot.repository.ClienteRepositorio;
+import br.com.vinicius.springboot.security.UserSS;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @Service
@@ -34,6 +38,11 @@ public class ClienteService {
 	}
 	
 	public Cliente find(int id) {
+		UserSS user = UserService.authenticated();
+		
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !(id == user.getId())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElse(null);		
 	}

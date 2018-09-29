@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class ApiController {
 		return ResponseEntity.ok().body(clientes);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/cliente/add", method = RequestMethod.POST)
 	public ResponseEntity<Cliente> add(@RequestBody @Valid Cliente cliente){
 		Cliente clienteSalvo = clienteService.insert(cliente);
@@ -41,6 +43,7 @@ public class ApiController {
 		return ResponseEntity.ok().body(cliente);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ResponseEntity<String> admin() {
 		return ResponseEntity.ok().body("<b>AREA ADMIN</b>");
