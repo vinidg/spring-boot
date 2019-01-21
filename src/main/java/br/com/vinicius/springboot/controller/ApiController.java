@@ -17,27 +17,27 @@ import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.service.ClienteService;
 
 @RestController
-@RequestMapping(value = "/service")
+@RequestMapping(value = "/cliente")
 public class ApiController {
 
 	@Autowired
 	private ClienteService clienteService;
 
-	@RequestMapping(value = "/cliente/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<List<Cliente>> getList() {
 		List<Cliente> clientes = clienteService.findAll();
 		return ResponseEntity.ok().body(clientes);
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/cliente/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Cliente> add(@RequestBody @Valid Cliente cliente){
 		Cliente clienteSalvo = clienteService.insert(cliente);
 		Cliente find = clienteService.find(clienteSalvo.getId());
 		return ResponseEntity.ok().body(find);
 	}
 	
-	@RequestMapping(value = "/cliente/find/{clienteId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/find/{clienteId}", method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable("clienteId") int id) {
 		Cliente cliente = clienteService.find(id);
 		return ResponseEntity.ok().body(cliente);
@@ -48,5 +48,5 @@ public class ApiController {
 	public ResponseEntity<String> admin() {
 		return ResponseEntity.ok().body("<b>AREA ADMIN</b>");
 	}
-
+	
 }

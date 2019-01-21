@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private Environment env;
 	
 	private static final String[] PUBLIC_MATCHERS_GET = {
-			"/service/cliente/**",
+			"/cliente/**",
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_POST = {
