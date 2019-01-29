@@ -37,17 +37,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Environment env;
 	
-	private static final String[] PUBLIC_MATCHERS_GET = {
-			"/cliente/**",
-	};
-	
-	private static final String[] PUBLIC_MATCHERS_POST = {
-			"/auth/forgot/**",
-			"/cliente/add"
-	};
-	
 	private static final String[] PUBLIC_MATCHERS = {
 			"/h2-console/**"
+	};
+
+	private static final String[] PUBLIC_MATCHERS_GET = {
+			"/produtos/**",
+			"/categorias/**",
+			"/estados/**"
+	};
+
+	private static final String[] PUBLIC_MATCHERS_POST = {
+			"/clientes/**",
+			"/auth/forgot/**"
 	};
 	
 	@Override
