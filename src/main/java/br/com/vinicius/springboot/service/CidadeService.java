@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.vinicius.springboot.domain.Cidade;
-import br.com.vinicius.springboot.repository.CidadeRepository;
+import br.com.vinicius.springboot.repositories.CidadeRepository;
 
 @Service
 public class CidadeService {

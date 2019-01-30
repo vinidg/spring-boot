@@ -2,23 +2,15 @@ package br.com.vinicius.springboot.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@Entity
-@NoArgsConstructor
+@Document
 public class Categoria implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	private String nome;
 	
@@ -27,4 +19,22 @@ public class Categoria implements Serializable{
 		this.id = id;
 		this.nome = nome;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
 }

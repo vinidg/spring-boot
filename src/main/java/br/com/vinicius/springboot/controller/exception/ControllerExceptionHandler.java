@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.vinicius.springboot.execeptions.AuthorizationException;
 import br.com.vinicius.springboot.service.exceptions.DataIntegrityException;
-import javassist.tools.rmi.ObjectNotFoundException;
+import br.com.vinicius.springboot.service.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {

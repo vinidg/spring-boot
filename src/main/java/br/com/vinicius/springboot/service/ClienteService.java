@@ -3,18 +3,17 @@ package br.com.vinicius.springboot.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.enums.Perfil;
 import br.com.vinicius.springboot.execeptions.AuthorizationException;
-import br.com.vinicius.springboot.repository.ClienteRepositorio;
+import br.com.vinicius.springboot.repositories.ClienteRepository;
 import br.com.vinicius.springboot.security.UserSS;
-import javassist.tools.rmi.ObjectNotFoundException;
+import br.com.vinicius.springboot.service.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -23,7 +22,7 @@ public class ClienteService {
 	private BCryptPasswordEncoder crypt;
 	
 	@Autowired
-	private ClienteRepositorio repo; 
+	private ClienteRepository repo; 
 	
 	@Transactional
 	public Cliente insert(Cliente obj) {
@@ -46,13 +45,10 @@ public class ClienteService {
 		return obj.orElse(null);		
 	}
 	
-	public Cliente findByUser(String user) throws ObjectNotFoundException {
+	public Cliente findByUser(String user) {
 	
-		Cliente obj = repo.findByUser(user);
-		if (obj == null) {
-			throw new ObjectNotFoundException(
-					"Objeto não encontrado! Id: " + ", Tipo: " + Cliente.class.getName());
-		}
-		return obj;
+		Optional<Cliente> obj = repo.findByUser(user);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + ", Tipo: " + Cliente.class.getName()));
 	}
 }

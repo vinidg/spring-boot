@@ -1,5 +1,6 @@
 package br.com.vinicius.springboot.service;
 
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +8,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.vinicius.springboot.domain.Cliente;
-import br.com.vinicius.springboot.repository.ClienteRepositorio;
+import br.com.vinicius.springboot.repositories.ClienteRepository;
 import br.com.vinicius.springboot.service.exceptions.ObjectNotFoundException;
 
 @Service
 public class AuthService {
 
 	@Autowired
-	private ClienteRepositorio clienteRepositorio;
+	private ClienteRepository clienteRepositorio;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -22,16 +23,13 @@ public class AuthService {
 	private Random rand = new Random();
 	
 	public void sendNewPassword(String user) {
-		Cliente cliente = clienteRepositorio.findByUser(user);
-		
-		if(cliente == null) {
-			throw new ObjectNotFoundException("User não encontrado");
-		}
+		Optional<Cliente> cliente = clienteRepositorio.findByUser(user);
+		cliente.orElseThrow(() -> new ObjectNotFoundException("User não encontrado"));
 		
 		String newPassword = newPassword();
-		cliente.setPass(encoder.encode(newPassword));
+		cliente.get().setPass(encoder.encode(newPassword));
 		
-		clienteRepositorio.save(cliente);
+		clienteRepositorio.save(cliente.get());
 	}
 
 	private String newPassword() {

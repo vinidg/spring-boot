@@ -5,30 +5,20 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import br.com.vinicius.springboot.enums.Perfil;
-import lombok.Builder;
-import lombok.Data;
 
-@Data
-@Builder
-@Entity
+@Document
 public class Cliente implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@NotEmpty
@@ -47,8 +37,6 @@ public class Cliente implements Serializable{
 	@NotEmpty
 	private String user;
 
-	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name="PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
 
 	public Set<Perfil> getPerfis() {
@@ -75,5 +63,65 @@ public class Cliente implements Serializable{
 		this.user = user;
 		this.perfis = perfis;
 		addPerfil(Perfil.CLIENTE);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public void setPerfis(Set<Integer> perfis) {
+		this.perfis = perfis;
 	}
 }
