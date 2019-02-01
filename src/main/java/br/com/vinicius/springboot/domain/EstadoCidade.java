@@ -7,30 +7,25 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public class Estado implements Serializable{
+@Document(collection="estado_cidade")
+public class EstadoCidade implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer id;
+	private String id;
 	private String nome;
+	private String sigla;
 	
-	private List<Cidade> cidades = new ArrayList<>();
+	private List<String> cidades = new ArrayList<>();
 	
-	public Estado() {
+	public EstadoCidade() {
 	}
 
-	public Estado(Integer id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
-	}
-
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -40,14 +35,6 @@ public class Estado implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<Cidade> getCidades() {
-		return cidades;
-	}
-
-	public void setCidades(List<Cidade> cidades) {
-		this.cidades = cidades;
 	}
 
 	@Override
@@ -66,7 +53,7 @@ public class Estado implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estado other = (Estado) obj;
+		EstadoCidade other = (EstadoCidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -74,5 +61,29 @@ public class Estado implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+
+	public List<String> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<String> cidades) {
+		this.cidades = cidades;
+	}
+
+	public EstadoCidade(String id, String nome, String sigla, List<String> cidades) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.sigla = sigla;
+		this.cidades = cidades;
+	}
+
 }

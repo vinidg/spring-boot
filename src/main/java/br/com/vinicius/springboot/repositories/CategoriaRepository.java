@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.vinicius.springboot.domain.Categoria;
 
 @Repository
-public interface CategoriaRepository extends MongoRepository<Categoria, Integer> {
+public interface CategoriaRepository extends MongoRepository<Categoria, String> {
 
 }

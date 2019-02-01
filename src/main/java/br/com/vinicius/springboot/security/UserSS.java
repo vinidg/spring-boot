@@ -9,21 +9,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.vinicius.springboot.enums.Perfil;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 public class UserSS implements UserDetails{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Getter
-	private Integer id;
+	private String id;
 	private String user;
 	private String senha;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	public UserSS(Integer id, String user, String senha, Set<Perfil> perfis) {
+	public UserSS(String id, String user, String senha, Set<Perfil> perfis) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -70,5 +66,11 @@ public class UserSS implements UserDetails{
 		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public UserSS() {
+	}
 
 }

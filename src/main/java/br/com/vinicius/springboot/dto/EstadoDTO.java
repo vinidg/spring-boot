@@ -2,27 +2,27 @@ package br.com.vinicius.springboot.dto;
 
 import java.io.Serializable;
 
-import br.com.vinicius.springboot.domain.Estado;
+import br.com.vinicius.springboot.domain.EstadoCidade;
 
 public class EstadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String id;
 	private String nome;
 	
 	public EstadoDTO() {
 	}
 
-	public EstadoDTO(Estado obj) {
+	public EstadoDTO(EstadoCidade obj) {
 		id = obj.getId();
 		nome = obj.getNome();
 	}
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -33,4 +33,5 @@ public class EstadoDTO implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }

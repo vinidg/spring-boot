@@ -5,9 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,25 +16,21 @@ public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	private String id;
 	
-	@NotEmpty
 	private String nome;
 	
-	@CPF
 	private String cpf;
 	
 	private String rg;
 	
 	private String dataNascimento;
 	
-	@NotEmpty
 	private String pass;
 	
-	@NotEmpty
 	private String user;
 
-	private Set<Integer> perfis = new HashSet<>();
+	private Set<String> perfis = new HashSet<>();
 
 	public Set<Perfil> getPerfis() {
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
@@ -51,8 +44,8 @@ public class Cliente implements Serializable{
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Cliente(int id, @NotEmpty String nome, @CPF String cpf, String rg, String dataNascimento,
-			@NotEmpty String pass, @NotEmpty String user, Set<Integer> perfis) {
+	public Cliente(String id, String nome, String cpf, String rg, String dataNascimento,
+			String pass, String user, Set<String> perfis) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -65,11 +58,11 @@ public class Cliente implements Serializable{
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -121,7 +114,7 @@ public class Cliente implements Serializable{
 		this.user = user;
 	}
 
-	public void setPerfis(Set<Integer> perfis) {
+	public void setPerfis(Set<String> perfis) {
 		this.perfis = perfis;
 	}
 }

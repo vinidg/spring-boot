@@ -39,13 +39,13 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value = "/find/{clienteId}", method = RequestMethod.GET)
-	public ResponseEntity<Cliente> find(@PathVariable("clienteId") int id) {
+	public ResponseEntity<Cliente> find(@PathVariable("clienteId") String id) {
 		Cliente cliente = clienteService.find(id);
 		return ResponseEntity.ok().body(cliente);
 	}
 	
 	@RequestMapping(value = "/findbyuser", method = RequestMethod.GET)
-	public ResponseEntity<Cliente> find(@RequestParam(value="value") String user) {
+	public ResponseEntity<Cliente> findUser(@RequestParam(value="value") String user) {
 		Cliente cliente = clienteService.findByUser(user);
 		return ResponseEntity.ok().body(cliente);
 	}

@@ -35,10 +35,10 @@ public class ClienteService {
 		return repo.findAll();
 	}
 	
-	public Cliente find(int id) {
+	public Cliente find(String id) {
 		UserSS user = UserService.authenticated();
 		
-		if(user == null || !user.hasRole(Perfil.ADMIN) && !(id == user.getId())) {
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !(id.equals(user.getId()))) {
 			throw new AuthorizationException("Acesso Negado");
 		}
 		Optional<Cliente> obj = repo.findById(id);

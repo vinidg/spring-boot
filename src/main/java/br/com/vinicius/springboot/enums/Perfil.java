@@ -1,21 +1,19 @@
 package br.com.vinicius.springboot.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@AllArgsConstructor
 public enum Perfil {
 
-	ADMIN(1, "ROLE_ADMIN"),
-	CLIENTE(2, "ROLE_CLIENTE");
-	
-	@Getter
-	private int id;
-	@Getter
+	ADMIN("1", "ROLE_ADMIN"),
+	CLIENTE("2", "ROLE_CLIENTE");
+
+	private String id;
 	private String descricao;
 	
+	private Perfil(String id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
+	}
 
-	public static Perfil toEnum(Integer id) {
+	public static Perfil toEnum(String id) {
 		if (id == null)
 			return null;
 		
@@ -24,5 +22,15 @@ public enum Perfil {
 				return x;
 		}
 		throw new IllegalArgumentException("id inválido " + id);
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
 	}
 }

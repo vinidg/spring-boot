@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.vinicius.springboot.domain.Cliente;
 
 @Repository
-public interface ClienteRepository extends MongoRepository<Cliente, Integer>{
+public interface ClienteRepository extends MongoRepository<Cliente, String>{
 
 	@Transactional(readOnly=true)
 	Optional<Cliente> findByUser(String user);
