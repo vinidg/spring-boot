@@ -5762,7 +5762,7 @@ public class Instantiation implements CommandLineRunner {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		EstadoCidade[] estadoCidade = mapper.readValue(json_estados_cidades, EstadoCidade[].class);
-//		estadoCidadeRepository.saveAll(Arrays.asList(estadoCidade));
+		estadoCidadeRepository.saveAll(Arrays.asList(estadoCidade));
 		
 	}
 
