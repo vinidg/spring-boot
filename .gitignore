@@ -20,4 +20,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-src/main/resources/application-prd.properties
+
+application-prd.properties
+
