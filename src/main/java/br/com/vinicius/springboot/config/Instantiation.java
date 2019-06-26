@@ -2,6 +2,7 @@ package br.com.vinicius.springboot.config;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +57,12 @@ public class Instantiation implements CommandLineRunner {
 
 		Cliente cliente1 = new Cliente();
 		cliente1.setId(null);
-		cliente1.setNome("Maria das Graças");
-		cliente1.setCpf("54417644144");
-		cliente1.setRg("412425678");
-		cliente1.setDataNascimento("10-05-2000");
-		cliente1.setPass(encoder.encode("1234567"));
-		cliente1.setUser("maria");
+		cliente1.setNome("Vinicius Duarte Galdino");
+		cliente1.setCpf("41434973875");
+		cliente1.setRg("454604385");
+		cliente1.setDataNascimento(LocalDate.of(1995, 3, 20));
+		cliente1.setPass(encoder.encode("vinidg123"));
+		cliente1.setUser("Vinicius");
 
 		cliente1.addPerfil(Perfil.ADMIN);
 		clienteRepositorio.saveAll(Arrays.asList(cliente1));

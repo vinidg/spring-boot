@@ -1,6 +1,7 @@
 package br.com.vinicius.springboot.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class Cliente implements Serializable{
 	
 	private String rg;
 	
-	private String dataNascimento;
+	private LocalDate dataNascimento;
 	
 	private String pass;
 	
@@ -44,14 +45,14 @@ public class Cliente implements Serializable{
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Cliente(String id, String nome, String cpf, String rg, String dataNascimento,
+	public Cliente(String id, String nome, String cpf, String rg, LocalDate dataNascimento,
 			String pass, String user, Set<String> perfis) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.rg = rg;
-		this.dataNascimento = dataNascimento;
+		this.setDataNascimento(dataNascimento);
 		this.pass = pass;
 		this.user = user;
 		this.perfis = perfis;
@@ -90,14 +91,6 @@ public class Cliente implements Serializable{
 		this.rg = rg;
 	}
 
-	public String getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public String getPass() {
 		return pass;
 	}
@@ -116,5 +109,13 @@ public class Cliente implements Serializable{
 
 	public void setPerfis(Set<String> perfis) {
 		this.perfis = perfis;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 }
