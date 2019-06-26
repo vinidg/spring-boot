@@ -21,5 +21,3 @@ dist/
 nbdist/
 .nb-gradle/
 
-application-prd.properties
-
