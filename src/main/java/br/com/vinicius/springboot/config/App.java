@@ -2,8 +2,6 @@ package br.com.vinicius.springboot.config;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +17,6 @@ import br.com.vinicius.springboot.service.S3Service;
 @EnableMongoRepositories("br.com.vinicius.springboot.repositories")
 @EntityScan("br.com.vinicius.springboot.domain")
 public class App {
-	private static final Logger LOGGER = LogManager.getLogger(App.class);
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
@@ -29,11 +26,6 @@ public class App {
 
 	@PostConstruct
     public void run() throws Exception {
-		LOGGER.debug("Debugging log");
-		LOGGER.info("Info log");
-		LOGGER.warn("Hey, This is a warning!");
-		LOGGER.error("Oops! We have an Error. OK");
-		LOGGER.fatal("Damn! Fatal error. Please fix me.");
-		s3Service.uploadFile("‪C:\\Users\\vduarteg\\Pictures\\print1.jpg");
+		s3Service.uploadFile("‪‪C:\\Users\\vinidg\\Pictures\\krampus.jpg");
     }
 }

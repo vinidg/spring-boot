@@ -21,14 +21,14 @@ public class S3Service {
 	@Autowired
 	private AmazonS3 amazonS3;
 
-	@Value("${s3.bucket}")
+	@Value("${aws.bucket}")
 	private String bucketName;
 	
 	public void uploadFile(String localFilePath) {
 		try {
 			File file = new File(localFilePath);
 			LOGGER.info("Iniciando upload");
-			amazonS3.putObject(new PutObjectRequest(bucketName, "Teste", file));
+			amazonS3.putObject(new PutObjectRequest(bucketName, "Teste.jpg", file));
 			LOGGER.info("Terminou upload");
 			
 		} catch (AmazonServiceException e) {
