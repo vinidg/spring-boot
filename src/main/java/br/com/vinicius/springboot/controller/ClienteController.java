@@ -20,7 +20,7 @@ import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.service.ClienteService;
 
 @RestController
-@RequestMapping(value = "/cliente")
+@RequestMapping(value = "/clientes")
 public class ClienteController {
 
 	@Autowired
