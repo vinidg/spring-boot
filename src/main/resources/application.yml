@@ -5,3 +5,8 @@ spring:
    
  profiles:
   active: dev
+
+img:
+ prefix:
+  client:
+   profile: cp
