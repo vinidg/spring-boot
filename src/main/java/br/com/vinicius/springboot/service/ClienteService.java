@@ -1,5 +1,6 @@
 package br.com.vinicius.springboot.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.enums.Perfil;
@@ -22,7 +24,10 @@ public class ClienteService {
 	private BCryptPasswordEncoder crypt;
 	
 	@Autowired
-	private ClienteRepository repo; 
+	private ClienteRepository repo;
+	
+	@Autowired
+	private S3Service s3Service;
 	
 	@Transactional
 	public Cliente insert(Cliente obj) {
@@ -50,5 +55,9 @@ public class ClienteService {
 		Optional<Cliente> obj = repo.findByUser(user);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + ", Tipo: " + Cliente.class.getName()));
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
 	}
 }

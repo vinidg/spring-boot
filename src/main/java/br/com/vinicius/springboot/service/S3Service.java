@@ -1,41 +1,55 @@
 package br.com.vinicius.springboot.service;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 
 @Service
 public class S3Service {
-	
+
 	private Logger LOGGER = LoggerFactory.getLogger(S3Service.class);
-	
+
 	@Autowired
 	private AmazonS3 amazonS3;
 
 	@Value("${aws.bucket}")
 	private String bucketName;
-	
-	public void uploadFile(String localFilePath) {
+
+	public URI uploadFile(MultipartFile multipartFile) {
 		try {
-			File file = new File(localFilePath);
-			LOGGER.info("Iniciando upload");
-			amazonS3.putObject(new PutObjectRequest(bucketName, "Teste.jpg", file));
-			LOGGER.info("Terminou upload");
-			
-		} catch (AmazonServiceException e) {
-			LOGGER.info("AmazonServiceException: "+e.getErrorMessage());
-			LOGGER.info("Status code: "+ e.getErrorCode());
-		} catch (AmazonClientException e) {
-			LOGGER.info("AmazonClienteException: "+e.getMessage());
+			String fileName = multipartFile.getOriginalFilename();
+			InputStream is = multipartFile.getInputStream();
+			String contentType = multipartFile.getContentType();
+
+			return uploadFile(is, fileName, contentType);
+		} catch (IOException e) {
+			throw new RuntimeException("Erro de IO: "+e.getMessage());
 		}
+
+	}
+
+	public URI uploadFile(InputStream is, String fileName, String contentType) {
+		try {
+			ObjectMetadata meta = new ObjectMetadata();
+			meta.setContentType(contentType);
+			LOGGER.info("Iniciando upload");
+			amazonS3.putObject(bucketName, fileName, is, meta);
+			LOGGER.info("Terminou upload");
+			return amazonS3.getUrl(bucketName, fileName).toURI();
+		} catch (URISyntaxException e) {
+			throw new RuntimeException("Erro ao converter URL para URI");
+		}
+
 	}
 }

@@ -1,5 +1,6 @@
 package br.com.vinicius.springboot.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.service.ClienteService;
 
 @RestController
 @RequestMapping(value = "/cliente")
-public class ApiController {
+public class ClienteController {
 
 	@Autowired
 	private ClienteService clienteService;
@@ -55,5 +57,13 @@ public class ApiController {
 	public ResponseEntity<String> admin() {
 		return ResponseEntity.ok().body("<b>AREA ADMIN</b>");
 	}
+	
+
+	@RequestMapping(value = "/picture", method = RequestMethod.POST)
+	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file){
+		URI uri = clienteService.uploadProfilePicture(file);
+		return ResponseEntity.created(uri).build();
+	}
+	
 	
 }
