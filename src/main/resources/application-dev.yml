@@ -8,7 +8,7 @@ spring:
    uri: mongodb://localhost:27017/springboot
 
 aws:
- access_key_id: 
- secret_access_key: 
+ access_key_id: AKIA443IFD4NMFPMBZU5
+ secret_access_key: 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
  bucket: duarte-store
  region: sa-east-1

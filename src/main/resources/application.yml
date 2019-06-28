@@ -10,3 +10,6 @@ img:
  prefix:
   client:
    profile: cp
+ 
+ profile:
+  size: 200   
