@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.domain.Produto;
 import br.com.vinicius.springboot.enums.Perfil;
 import br.com.vinicius.springboot.execeptions.AuthorizationException;
@@ -51,10 +50,11 @@ public class ProdutoService {
 	@Transactional
 	public Produto insert(Produto obj, MultipartFile multipartFile) {
 		obj = repo.save(obj);
+		uploadProfilePicture(multipartFile, obj.getId());
 		return obj;
 	}
 	
-	public URI uploadProfilePicture(MultipartFile multipartFile) {
+	private URI uploadProfilePicture(MultipartFile multipartFile, String idProduto) {
 		
 		UserSS user = UserService.authenticated();
 		if (user==null || user.hasRole(Perfil.ADMIN)) {
@@ -62,10 +62,9 @@ public class ProdutoService {
 		}
 		
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
-		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
 		
-		String fileName = prefix + user.getId() + ".jpg";
+		String fileName = prefix + idProduto + ".jpg";
 		
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), "produtos", fileName, "image");
 		

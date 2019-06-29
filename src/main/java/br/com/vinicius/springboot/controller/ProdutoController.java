@@ -1,6 +1,5 @@
 package br.com.vinicius.springboot.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -42,12 +41,6 @@ public class ProdutoController {
 		service.insert(produto, file);
 		Produto find = service.find(produto.getId());
 		return ResponseEntity.ok().body(find);
-	}
-	
-	@RequestMapping(value = "/picture", method = RequestMethod.POST)
-	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file){
-		URI uri = service.uploadProfilePicture(file);
-		return ResponseEntity.created(uri).build();
 	}
 	
 	//TODO implementar buscar pro produtos inspirado no projeto com pageable

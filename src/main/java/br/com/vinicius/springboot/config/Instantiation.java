@@ -16,13 +16,16 @@ import com.google.common.io.Resources;
 
 import br.com.vinicius.springboot.domain.Categoria;
 import br.com.vinicius.springboot.domain.Cliente;
+import br.com.vinicius.springboot.domain.Endereco;
 import br.com.vinicius.springboot.domain.EstadoCidade;
 import br.com.vinicius.springboot.domain.Produto;
 import br.com.vinicius.springboot.enums.Perfil;
 import br.com.vinicius.springboot.repositories.CategoriaRepository;
 import br.com.vinicius.springboot.repositories.ClienteRepository;
+import br.com.vinicius.springboot.repositories.EnderecoRepository;
 import br.com.vinicius.springboot.repositories.EstadoCidadeRepository;
 import br.com.vinicius.springboot.repositories.ProdutoRepository;
+import br.com.vinicius.springboot.service.EstadoCidadeService;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -41,7 +44,10 @@ public class Instantiation implements CommandLineRunner {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
-
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -97,6 +103,7 @@ public class Instantiation implements CommandLineRunner {
 		
 		clienteRepositorio.saveAll(Arrays.asList(cliente1, cliente2));
 		
+		
 		URL url = Resources.getResource("estados_cidades.json");
 		ObjectMapper mapper = new ObjectMapper();
 		EstadoCidade[] estadoCidade = null;
@@ -104,9 +111,26 @@ public class Instantiation implements CommandLineRunner {
 			estadoCidade = mapper.readValue(Resources.toString(url, Charsets.UTF_8), EstadoCidade[].class);
 		} catch (IOException e) {
 			throw new Exception(e);
-		}		
+		}
+		
 		estadoCidadeRepository.saveAll(Arrays.asList(estadoCidade));
 		
+		
+		Endereco enderecoCliente1 = new Endereco();
+		enderecoCliente1.setId(null);
+		enderecoCliente1.setLogradouro("Av Fagundes de Oliveira");
+		enderecoCliente1.setNumero("519");
+		enderecoCliente1.setCep("099750300");
+		enderecoCliente1.setComplemento("APT 172 Bl Alvorada");
+		enderecoCliente1.setBairro("Piraporinha");
+		enderecoCliente1.setCidade("Diadema");
+		enderecoCliente1.setEstado("São Paulo");
+		
+		enderecoCliente1.setCliente(cliente1);
+		
+		enderecoRepository.save(enderecoCliente1);
+		
 	}
+	
 
 }

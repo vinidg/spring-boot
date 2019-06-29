@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.service.ClienteService;
@@ -36,12 +37,13 @@ public class ClienteController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Cliente> add(@RequestBody @Valid Cliente cliente){
 		Cliente clienteSalvo = clienteService.insert(cliente);
-		Cliente find = clienteService.find(clienteSalvo.getId());
-		return ResponseEntity.ok().body(find);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(clienteSalvo.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(value = "/find/{clienteId}", method = RequestMethod.GET)
-	public ResponseEntity<Cliente> find(@PathVariable("clienteId") String id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@PathVariable("id") String id) {
 		Cliente cliente = clienteService.find(id);
 		return ResponseEntity.ok().body(cliente);
 	}
