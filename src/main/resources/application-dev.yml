@@ -5,10 +5,10 @@ jwt:
 spring:
  data:
   mongodb:
-   uri: mongodb://localhost:27017/springboot
+   uri: mongodb://vinidg:1234567@localhost:27017/duarte-store
 
 aws:
- access_key_id: AKIA443IFD4NMFPMBZU5
- secret_access_key: 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
+ access_key_id: AKIA443IFD4NFAXDL7NJ
+ secret_access_key: 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
  bucket: duarte-store
  region: sa-east-1

@@ -21,7 +21,7 @@ import br.com.vinicius.springboot.dto.CategoriaDTO;
 import br.com.vinicius.springboot.service.CategoriaService;
 
 @RestController
-@RequestMapping(value = "/categoria")
+@RequestMapping(value = "/categorias")
 public class CategoriaController {
 
 	@Autowired

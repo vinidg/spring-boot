@@ -82,7 +82,7 @@ public class ClienteService {
 		
 		String fileName = prefix + user.getId() + ".jpg";
 		
-		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), "clientes", fileName, "image");
 		
 	}
 }
