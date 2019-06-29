@@ -8,8 +8,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.vinicius.springboot.domain.Cliente;
 import br.com.vinicius.springboot.domain.Produto;
 import br.com.vinicius.springboot.enums.Perfil;
 import br.com.vinicius.springboot.execeptions.AuthorizationException;
@@ -44,6 +46,12 @@ public class ProdutoService {
 	
 	public List<Produto> findAll(){
 		return repo.findAll();
+	}
+	
+	@Transactional
+	public Produto insert(Produto obj, MultipartFile multipartFile) {
+		obj = repo.save(obj);
+		return obj;
 	}
 	
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
