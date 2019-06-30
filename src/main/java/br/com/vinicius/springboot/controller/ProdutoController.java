@@ -48,7 +48,7 @@ public class ProdutoController {
 	
 	@RequestMapping(value="/picture/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> picture(@PathVariable(value="id") String idProduto, @RequestParam(name="file") MultipartFile file){
-		URI uri = service.uploadProfilePicture(file, idProduto);
+		URI uri = service.uploadProductPicture(file, idProduto);
 		return ResponseEntity.created(uri).build();
 	}
 	

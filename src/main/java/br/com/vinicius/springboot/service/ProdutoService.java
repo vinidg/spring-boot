@@ -53,7 +53,7 @@ public class ProdutoService {
 		return obj;
 	}
 	
-	public URI uploadProfilePicture(MultipartFile multipartFile, String idProduto) {
+	public URI uploadProductPicture(MultipartFile multipartFile, String idProduto) {
 		
 		UserSS user = UserService.authenticated();
 		if (user==null || !user.hasRole(Perfil.ADMIN)) {
@@ -65,8 +65,18 @@ public class ProdutoService {
 		
 		String fileName = prefix + idProduto + ".jpg";
 		
+		uploadProductPictureSmall(jpgImage, idProduto);
+		
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), "produtos", fileName, "image");
 		
+	}
+	
+	public void uploadProductPictureSmall(BufferedImage image, String idProduto) {
+		image = imageService.resize(image, size/4);
+		
+		String fileName = prefix + idProduto + "-small" + ".jpg";
+		
+		s3Service.uploadFile(imageService.getInputStream(image, "jpg"), "produtos", fileName, "image");
 	}
 	
 }
