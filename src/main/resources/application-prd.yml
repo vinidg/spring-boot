@@ -1,3 +1,7 @@
+jwt:
+ secret: ${SECRET_KEY}
+ expiration: 86400000
+
 spring:
  data:
   mongodb:
