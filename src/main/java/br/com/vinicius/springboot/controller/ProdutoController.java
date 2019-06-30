@@ -1,5 +1,6 @@
 package br.com.vinicius.springboot.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.vinicius.springboot.domain.Produto;
 import br.com.vinicius.springboot.service.ProdutoService;
@@ -37,10 +39,17 @@ public class ProdutoController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public ResponseEntity<Produto> add(@RequestBody @Valid Produto produto, @RequestParam(name="file") MultipartFile file) {
-		service.insert(produto, file);
-		Produto find = service.find(produto.getId());
-		return ResponseEntity.ok().body(find);
+	public ResponseEntity<Produto> add(@RequestBody @Valid Produto produto) {
+		Produto produtoSalvo = service.insert(produto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(produtoSalvo.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/picture/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> picture(@PathVariable(value="id") String idProduto, @RequestParam(name="file") MultipartFile file){
+		URI uri = service.uploadProfilePicture(file, idProduto);
+		return ResponseEntity.created(uri).build();
 	}
 	
 	//TODO implementar buscar pro produtos inspirado no projeto com pageable

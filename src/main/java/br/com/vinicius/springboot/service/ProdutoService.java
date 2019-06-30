@@ -48,16 +48,15 @@ public class ProdutoService {
 	}
 	
 	@Transactional
-	public Produto insert(Produto obj, MultipartFile multipartFile) {
+	public Produto insert(Produto obj) {
 		obj = repo.save(obj);
-		uploadProfilePicture(multipartFile, obj.getId());
 		return obj;
 	}
 	
-	private URI uploadProfilePicture(MultipartFile multipartFile, String idProduto) {
+	public URI uploadProfilePicture(MultipartFile multipartFile, String idProduto) {
 		
 		UserSS user = UserService.authenticated();
-		if (user==null || user.hasRole(Perfil.ADMIN)) {
+		if (user==null || !user.hasRole(Perfil.ADMIN)) {
 			throw new AuthorizationException("Acesso negado");
 		}
 		
