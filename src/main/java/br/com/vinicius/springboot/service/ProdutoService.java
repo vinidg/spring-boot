@@ -61,7 +61,7 @@ public class ProdutoService {
 		}
 		
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
-		jpgImage = imageService.resize(jpgImage, size);
+//		jpgImage = imageService.resize(jpgImage, size);
 		
 		String fileName = prefix + idProduto + ".jpg";
 		
@@ -77,6 +77,12 @@ public class ProdutoService {
 		String fileName = prefix + idProduto + "-small" + ".jpg";
 		
 		s3Service.uploadFile(imageService.getInputStream(image, "jpg"), "produtos", fileName, "image");
+	}
+	
+	public Produto update(Produto produto) {
+		Produto produtoUpdate = find(produto.getId());
+		return repo.save(produtoUpdate);
+		
 	}
 	
 }

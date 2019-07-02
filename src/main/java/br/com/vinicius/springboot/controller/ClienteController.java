@@ -60,6 +60,15 @@ public class ClienteController {
 		return ResponseEntity.ok().body("<b>AREA ADMIN</b>");
 	}
 	
+	//TODO IMPLEMENTAR EDIT DE USUARIO
+	
+//	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+//	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
+//		Cliente obj = clienteService.fromDTO(objDto);
+//		obj.setId(id);
+//		obj = service.update(obj);
+//		return ResponseEntity.noContent().build();
+//	}
 
 	@RequestMapping(value = "/picture", method = RequestMethod.POST)
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file){
