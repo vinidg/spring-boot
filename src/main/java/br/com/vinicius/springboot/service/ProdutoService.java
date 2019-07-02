@@ -72,7 +72,7 @@ public class ProdutoService {
 	}
 	
 	public void uploadProductPictureSmall(BufferedImage image, String idProduto) {
-		image = imageService.resize(image, size/4);
+		image = imageService.resize(image, size);
 		
 		String fileName = prefix + idProduto + "-small" + ".jpg";
 		
