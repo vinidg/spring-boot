@@ -5,7 +5,8 @@ import java.io.Serializable;
 public class ItemPedidoDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private String produtoId;
 	private Integer quantidade;
 	private Double preco;
 	
@@ -20,6 +21,12 @@ public class ItemPedidoDTO implements Serializable{
 	}
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+	public String getProdutoId() {
+		return produtoId;
+	}
+	public void setProdutoId(String produtoId) {
+		this.produtoId = produtoId;
 	}
 	
 }

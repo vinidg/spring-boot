@@ -25,7 +25,6 @@ import br.com.vinicius.springboot.repositories.ClienteRepository;
 import br.com.vinicius.springboot.repositories.EnderecoRepository;
 import br.com.vinicius.springboot.repositories.EstadoCidadeRepository;
 import br.com.vinicius.springboot.repositories.ProdutoRepository;
-import br.com.vinicius.springboot.service.EstadoCidadeService;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -54,6 +53,7 @@ public class Instantiation implements CommandLineRunner {
 		clienteRepositorio.deleteAll();
 		categoriaRepository.deleteAll();
 		estadoCidadeRepository.deleteAll();
+		produtoRepository.deleteAll();
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");

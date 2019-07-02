@@ -18,17 +18,11 @@ public class Cliente implements Serializable{
 
 	@Id
 	private String id;
-	
 	private String nome;
-	
 	private String cpf;
-	
 	private String rg;
-	
 	private LocalDate dataNascimento;
-	
 	private String pass;
-	
 	private String user;
 
 	private Set<String> perfis = new HashSet<>();
