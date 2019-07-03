@@ -12,5 +12,5 @@ import br.com.vinicius.springboot.domain.Cliente;
 public interface ClienteRepository extends MongoRepository<Cliente, String>{
 
 	@Transactional(readOnly=true)
-	Optional<Cliente> findByUser(String user);
+	Optional<Cliente> findByEmail(String email);
 }

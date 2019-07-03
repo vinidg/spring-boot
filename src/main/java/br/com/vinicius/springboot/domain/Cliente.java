@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.Email;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,7 +25,8 @@ public class Cliente implements Serializable{
 	private String rg;
 	private LocalDate dataNascimento;
 	private String pass;
-	private String user;
+	@Email
+	private String email;
 
 	private Set<String> perfis = new HashSet<>();
 
@@ -40,7 +43,7 @@ public class Cliente implements Serializable{
 	}
 
 	public Cliente(String id, String nome, String cpf, String rg, LocalDate dataNascimento,
-			String pass, String user, Set<String> perfis) {
+			String pass, String email, Set<String> perfis) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -48,7 +51,7 @@ public class Cliente implements Serializable{
 		this.rg = rg;
 		this.setDataNascimento(dataNascimento);
 		this.pass = pass;
-		this.user = user;
+		this.email = email;
 		this.perfis = perfis;
 		addPerfil(Perfil.CLIENTE);
 	}
@@ -93,12 +96,12 @@ public class Cliente implements Serializable{
 		this.pass = pass;
 	}
 
-	public String getUser() {
-		return user;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setPerfis(Set<String> perfis) {

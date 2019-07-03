@@ -62,9 +62,9 @@ public class ClienteService {
 		return obj.orElse(null);		
 	}
 	
-	public Cliente findByUser(String user) {
+	public Cliente findByEmail(String email) {
 	
-		Optional<Cliente> obj = repo.findByUser(user);
+		Optional<Cliente> obj = repo.findByEmail(email);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + ", Tipo: " + Cliente.class.getName()));
 	}

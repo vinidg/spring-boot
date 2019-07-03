@@ -48,16 +48,10 @@ public class ClienteController {
 		return ResponseEntity.ok().body(cliente);
 	}
 	
-	@RequestMapping(value = "/findbyuser", method = RequestMethod.GET)
-	public ResponseEntity<Cliente> findUser(@RequestParam(value="value") String user) {
-		Cliente cliente = clienteService.findByUser(user);
+	@RequestMapping(value = "/findbyemail", method = RequestMethod.GET)
+	public ResponseEntity<Cliente> findUser(@RequestParam(value="value") String email) {
+		Cliente cliente = clienteService.findByEmail(email);
 		return ResponseEntity.ok().body(cliente);
-	}
-	
-	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ResponseEntity<String> admin() {
-		return ResponseEntity.ok().body("<b>AREA ADMIN</b>");
 	}
 	
 	//TODO IMPLEMENTAR EDIT DE USUARIO

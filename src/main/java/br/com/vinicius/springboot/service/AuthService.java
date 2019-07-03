@@ -22,9 +22,9 @@ public class AuthService {
 	
 	private Random rand = new Random();
 	
-	public void sendNewPassword(String user) {
-		Optional<Cliente> cliente = clienteRepositorio.findByUser(user);
-		cliente.orElseThrow(() -> new ObjectNotFoundException("User não encontrado"));
+	public void sendNewPassword(String email) {
+		Optional<Cliente> cliente = clienteRepositorio.findByEmail(email);
+		cliente.orElseThrow(() -> new ObjectNotFoundException("Email não encontrado"));
 		
 		String newPassword = newPassword();
 		cliente.get().setPass(encoder.encode(newPassword));

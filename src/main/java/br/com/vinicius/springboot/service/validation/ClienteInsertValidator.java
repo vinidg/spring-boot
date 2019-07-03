@@ -32,7 +32,7 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 			list.add(new FieldMessage("cpf", "CPF inválido"));
 		}
 		
-		Optional<Cliente> aux = repo.findByUser(objDto.getUser());
+		Optional<Cliente> aux = repo.findByEmail(objDto.getEmail());
 		if (aux.get() != null) {
 			list.add(new FieldMessage("user", "User já existente"));
 		}
