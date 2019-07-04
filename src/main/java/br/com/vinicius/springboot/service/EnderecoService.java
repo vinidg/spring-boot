@@ -24,4 +24,11 @@ public class EnderecoService {
 		return enderecos;
 	}
 	
+	public Endereco insert(Endereco obj, String clienteId) {
+		Cliente cliente = clienteService.find(clienteId);
+		obj.setCliente(cliente);
+		Endereco endereco = enderecoRepository.insert(obj);
+		return endereco;
+	}
+	
 }
