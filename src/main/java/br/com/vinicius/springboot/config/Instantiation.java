@@ -50,7 +50,7 @@ public class Instantiation implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		clienteRepositorio.deleteAll();
+//		clienteRepositorio.deleteAll();
 		estadoCidadeRepository.deleteAll();
 //		categoriaRepository.deleteAll();
 //		produtoRepository.deleteAll();
@@ -82,53 +82,53 @@ public class Instantiation implements CommandLineRunner {
 //		
 //		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10, prod11, prod12, prod13, prod14));
 
-		Cliente cliente1 = new Cliente();
-		cliente1.setId(null);
-		cliente1.setNome("Vinicius Duarte Galdino");
-		cliente1.setCpf("41434973875");
-		cliente1.setRg("454604385");
-		cliente1.setDataNascimento(LocalDate.of(1995, 3, 20));
-		cliente1.setPass(encoder.encode("vinidg123"));
-		cliente1.setEmail("vinidgdon@gmail.com");
-		cliente1.addPerfil(Perfil.ADMIN);
-		
-		Cliente cliente2 = new Cliente();
-		cliente2.setId(null);
-		cliente2.setNome("Maria Carla Alveida");
-		cliente2.setCpf("1234567890");
-		cliente2.setRg("416357478");
-		cliente2.setDataNascimento(LocalDate.of(1986, 7, 12));
-		cliente2.setPass(encoder.encode("maria123"));
-		cliente2.setEmail("maria@gmail.com");
-		
-		clienteRepositorio.saveAll(Arrays.asList(cliente1, cliente2));
-		
-		
-//		URL url = Resources.getResource("estados_cidades.json");
-//		ObjectMapper mapper = new ObjectMapper();
-//		EstadoCidade[] estadoCidade = null;
-//		try {
-//			estadoCidade = mapper.readValue(Resources.toString(url, Charsets.UTF_8), EstadoCidade[].class);
-//		} catch (IOException e) {
-//			throw new Exception(e);
-//		}
+//		Cliente cliente1 = new Cliente();
+//		cliente1.setId(null);
+//		cliente1.setNome("Vinicius Duarte Galdino");
+//		cliente1.setCpf("41434973875");
+//		cliente1.setRg("454604385");
+//		cliente1.setDataNascimento(LocalDate.of(1995, 3, 20));
+//		cliente1.setPass(encoder.encode("vinidg123"));
+//		cliente1.setEmail("vinidgdon@gmail.com");
+//		cliente1.addPerfil(Perfil.ADMIN);
 //		
-//		estadoCidadeRepository.saveAll(Arrays.asList(estadoCidade));
+//		Cliente cliente2 = new Cliente();
+//		cliente2.setId(null);
+//		cliente2.setNome("Maria Carla Alveida");
+//		cliente2.setCpf("1234567890");
+//		cliente2.setRg("416357478");
+//		cliente2.setDataNascimento(LocalDate.of(1986, 7, 12));
+//		cliente2.setPass(encoder.encode("maria123"));
+//		cliente2.setEmail("maria@gmail.com");
 //		
+//		clienteRepositorio.saveAll(Arrays.asList(cliente1, cliente2));
 		
-		Endereco enderecoCliente1 = new Endereco();
-		enderecoCliente1.setId(null);
-		enderecoCliente1.setLogradouro("Av Fagundes de Oliveira");
-		enderecoCliente1.setNumero("519");
-		enderecoCliente1.setCep("099750300");
-		enderecoCliente1.setComplemento("APT 172 Bl Alvorada");
-		enderecoCliente1.setBairro("Piraporinha");
-		enderecoCliente1.setCidade("Diadema");
-		enderecoCliente1.setEstado("São Paulo");
 		
-		enderecoCliente1.setCliente(cliente1);
+		URL url = Resources.getResource("estados_cidades.json");
+		ObjectMapper mapper = new ObjectMapper();
+		EstadoCidade[] estadoCidade = null;
+		try {
+			estadoCidade = mapper.readValue(Resources.toString(url, Charsets.UTF_8), EstadoCidade[].class);
+		} catch (IOException e) {
+			throw new Exception(e);
+		}
 		
-		enderecoRepository.save(enderecoCliente1);
+		estadoCidadeRepository.saveAll(Arrays.asList(estadoCidade));
+		
+		
+//		Endereco enderecoCliente1 = new Endereco();
+//		enderecoCliente1.setId(null);
+//		enderecoCliente1.setLogradouro("Av Fagundes de Oliveira");
+//		enderecoCliente1.setNumero("519");
+//		enderecoCliente1.setCep("099750300");
+//		enderecoCliente1.setComplemento("APT 172 Bl Alvorada");
+//		enderecoCliente1.setBairro("Piraporinha");
+//		enderecoCliente1.setCidade("Diadema");
+//		enderecoCliente1.setEstado("São Paulo");
+		
+//		enderecoCliente1.setCliente(cliente1);
+		
+//		enderecoRepository.save(enderecoCliente1);
 		
 	}
 	
