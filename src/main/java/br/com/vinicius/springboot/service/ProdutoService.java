@@ -7,13 +7,18 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.vinicius.springboot.domain.Categoria;
 import br.com.vinicius.springboot.domain.Produto;
 import br.com.vinicius.springboot.enums.Perfil;
 import br.com.vinicius.springboot.execeptions.AuthorizationException;
+import br.com.vinicius.springboot.repositories.CategoriaRepository;
 import br.com.vinicius.springboot.repositories.ProdutoRepository;
 import br.com.vinicius.springboot.security.UserSS;
 import br.com.vinicius.springboot.service.exceptions.ObjectNotFoundException;
@@ -23,6 +28,9 @@ public class ProdutoService {
 	
 	@Autowired
 	private ProdutoRepository repo;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepo;
 	
 	@Autowired
 	private ImageService imageService;
@@ -35,6 +43,7 @@ public class ProdutoService {
 	
 	@Value("${img.profile.size}")
 	private Integer size;
+	
 
 	public Produto find(String id) {
 		
@@ -43,8 +52,10 @@ public class ProdutoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));	
 	}
 	
-	public List<Produto> findAll(){
-		return repo.findAll();
+	public Page<Produto> findByCategorias(List<String> ids, Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		List<Categoria> categorias = (List<Categoria>) categoriaRepo.findAllById(ids);
+		return repo.findByCategoriasIn(categorias, pageRequest);
 	}
 	
 	@Transactional

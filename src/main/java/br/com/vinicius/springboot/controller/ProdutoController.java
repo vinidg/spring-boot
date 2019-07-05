@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.vinicius.springboot.domain.Produto;
 import br.com.vinicius.springboot.service.ProdutoService;
+import br.com.vinicius.springboot.utils.URL;
 
 @RestController
 @RequestMapping(value="/produtos")
@@ -33,8 +35,14 @@ public class ProdutoController {
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public ResponseEntity<List<Produto>> findAll() {
-		List<Produto> obj = service.findAll();
+	public ResponseEntity<Page<Produto>> findByCategorias(
+			@RequestParam(value="categorias", defaultValue="") String categorias, 
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direction) {
+		List<String> ids = URL.decodeStringList(categorias);
+		Page<Produto> obj = service.findByCategorias(ids, page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -58,7 +66,5 @@ public class ProdutoController {
 		URI uri = service.uploadProductPicture(file, idProduto);
 		return ResponseEntity.created(uri).build();
 	}
-	
-	//TODO implementar buscar pro produtos inspirado no projeto com pageable
 	
 }
