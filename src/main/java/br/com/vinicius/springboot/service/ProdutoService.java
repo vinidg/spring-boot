@@ -55,7 +55,13 @@ public class ProdutoService {
 	public Page<Produto> findByCategorias(List<String> ids, Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		List<Categoria> categorias = (List<Categoria>) categoriaRepo.findAllById(ids);
-		return repo.findByCategoriasIn(categorias, pageRequest);
+		Page<Produto> list = null;
+		if(categorias.isEmpty()) {
+			list = repo.findAll(pageRequest);
+		}else {
+			list = repo.findByCategoriasIn(categorias, pageRequest);
+		}
+		return list;
 	}
 	
 	@Transactional

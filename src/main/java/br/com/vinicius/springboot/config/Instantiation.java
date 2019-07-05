@@ -79,7 +79,7 @@ public class Instantiation implements CommandLineRunner {
 		Produto prod11 = new Produto(null, "Vela perfumada", 10.0, 210, Arrays.asList(cat7, cat3, cat6));
 		Produto prod12 = new Produto(null, "Notebook", 5200.4, 2, Arrays.asList(cat1));
 		Produto prod13 = new Produto(null, "Web cam", 240.0, 156, Arrays.asList(cat1));
-		Produto prod14 = new Produto(null, "Cabo HDMI", 41.0, 147, Arrays.asList(cat5, cat1));
+		Produto prod14 = new Produto(null, "Cabo HDMI", 41.0, 147, Arrays.asList(cat1));
 		
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10, prod11, prod12, prod13, prod14));
 
