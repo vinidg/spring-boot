@@ -13,6 +13,7 @@ public class Endereco implements Serializable{
 
 	@Id
 	private String id;
+	private String nome;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -20,6 +21,7 @@ public class Endereco implements Serializable{
 	private String cep;
 	private String cidade;
 	private String estado;
+	private Boolean principal;
 	
 	@DBRef(lazy = true)
 	private Cliente cliente;
@@ -113,6 +115,22 @@ public class Endereco implements Serializable{
 	public Endereco() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Boolean getPrincipal() {
+		return principal;
+	}
+
+	public void setPrincipal(Boolean principal) {
+		this.principal = principal;
 	}
 	
 }

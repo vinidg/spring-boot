@@ -3,9 +3,9 @@ package br.com.vinicius.springboot.enums;
 public enum Entrega {
 
 	PAGAMENTO_CONFIRMADO("1", "O pagamento foi confirmado"),
-	PEDIDO_NA_DISTRIBUIDORA("3", "O pedido está na distribuidora"),
-	PEDIDO_EM_ENTREGA("4", "O pedido na rota de entrega"),
-	PEDIDO_ENTREGUE("5", "O pedido foi entregue");
+	PEDIDO_NA_DISTRIBUIDORA("2", "O pedido está na distribuidora"),
+	PEDIDO_EM_ENTREGA("3", "O pedido na rota de entrega"),
+	PEDIDO_ENTREGUE("4", "O pedido foi entregue");
 
 	private String id;
 	private String descricao;

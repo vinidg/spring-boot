@@ -1,6 +1,7 @@
 package br.com.vinicius.springboot.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -39,4 +40,11 @@ public class PedidoController {
 		Pedido pedido = pedidoService.find(id);
 		return ResponseEntity.ok().body(pedido);
 	}
+	
+	@RequestMapping(value="/cliente/{id}", method=RequestMethod.GET)
+	public ResponseEntity<List<Pedido>> getCliente(@PathVariable("id") String clienteId){
+		List<Pedido> listPedidos = pedidoService.findByCliente(clienteId);
+		return ResponseEntity.ok().body(listPedidos);
+	}
+	
 }

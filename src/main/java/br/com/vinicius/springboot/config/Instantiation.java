@@ -119,17 +119,32 @@ public class Instantiation implements CommandLineRunner {
 		
 		Endereco enderecoCliente1 = new Endereco();
 		enderecoCliente1.setId(null);
+		enderecoCliente1.setNome("Casa");
 		enderecoCliente1.setLogradouro("Av Fagundes de Oliveira");
 		enderecoCliente1.setNumero("519");
-		enderecoCliente1.setCep("099750300");
+		enderecoCliente1.setCep("099750-300");
 		enderecoCliente1.setComplemento("APT 172 Bl Alvorada");
 		enderecoCliente1.setBairro("Piraporinha");
 		enderecoCliente1.setCidade("Diadema");
 		enderecoCliente1.setEstado("São Paulo");
+		enderecoCliente1.setPrincipal(true);
+
+		Endereco enderecoCliente12 = new Endereco();
+		enderecoCliente12.setId(null);
+		enderecoCliente12.setNome("Trabalho");
+		enderecoCliente12.setLogradouro("Av. das Nações Unidas");
+		enderecoCliente12.setNumero("14261");
+		enderecoCliente12.setCep("04794-000");
+		enderecoCliente12.setComplemento("19 andar");
+		enderecoCliente12.setBairro("Chácara Santo Antônio");
+		enderecoCliente12.setCidade("São Paulo");
+		enderecoCliente12.setEstado("São Paulo");
+		enderecoCliente12.setPrincipal(false);
 		
 		enderecoCliente1.setCliente(cliente1);
+		enderecoCliente12.setCliente(cliente1);
 		
-		enderecoRepository.save(enderecoCliente1);
+		enderecoRepository.saveAll(Arrays.asList(enderecoCliente1, enderecoCliente12));
 		
 	}
 	
