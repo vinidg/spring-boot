@@ -24,6 +24,7 @@ import br.com.vinicius.springboot.repositories.CategoriaRepository;
 import br.com.vinicius.springboot.repositories.ClienteRepository;
 import br.com.vinicius.springboot.repositories.EnderecoRepository;
 import br.com.vinicius.springboot.repositories.EstadoCidadeRepository;
+import br.com.vinicius.springboot.repositories.PedidoRepository;
 import br.com.vinicius.springboot.repositories.ProdutoRepository;
 
 @Configuration
@@ -47,6 +48,9 @@ public class Instantiation implements CommandLineRunner {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -55,6 +59,7 @@ public class Instantiation implements CommandLineRunner {
 		categoriaRepository.deleteAll();
 		produtoRepository.deleteAll();
 		enderecoRepository.deleteAll();
+		pedidoRepository.deleteAll();
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");

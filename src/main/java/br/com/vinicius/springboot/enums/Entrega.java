@@ -16,11 +16,11 @@ public enum Entrega {
 		this.descricao = descricao;
 	}
 
-	public static Perfil toEnum(String id) {
+	public static Entrega toEnum(String id) {
 		if (id == null)
 			return null;
 		
-		for(Perfil x : Perfil.values()) {
+		for(Entrega x : Entrega.values()) {
 			if(id.equals(x.getId()))
 				return x;
 		}

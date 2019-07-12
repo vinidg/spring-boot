@@ -54,7 +54,7 @@ public class ProdutoController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Produto> update(@RequestBody @Valid Produto produto, @PathVariable("id") String id) {
 		produto.setId(id);
 		service.update(produto);

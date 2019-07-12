@@ -36,7 +36,7 @@ public class Pedido implements Serializable {
 	
 	private void addEntrega(Entrega entrega) {
 		RastreioDTO dto = new RastreioDTO();
-		dto.setStatus(entrega.getDescricao());
+		dto.setEntrega(entrega);
 		dto.setData(LocalDateTime.now());
 		rastreios.add(dto);
 	}
