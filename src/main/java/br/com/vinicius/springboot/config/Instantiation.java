@@ -27,7 +27,6 @@ import br.com.vinicius.springboot.repositories.EstadoCidadeRepository;
 import br.com.vinicius.springboot.repositories.PedidoRepository;
 import br.com.vinicius.springboot.repositories.ProdutoRepository;
 
-@Configuration
 public class Instantiation implements CommandLineRunner {
 
 	@Autowired
