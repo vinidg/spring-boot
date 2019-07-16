@@ -27,6 +27,7 @@ public class Cliente implements Serializable{
 	private String pass;
 	@Email
 	private String email;
+	private String playerId;
 
 	private Set<String> perfis = new HashSet<>();
 
@@ -114,5 +115,13 @@ public class Cliente implements Serializable{
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public String getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(String playerId) {
+		this.playerId = playerId;
 	}
 }
