@@ -16,14 +16,14 @@ public class UserSS implements UserDetails{
 	
 	private String id;
 	private String email;
-	private String senha;
+	private String pass;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	public UserSS(String id, String email, String senha, Set<Perfil> perfis) {
+	public UserSS(String id, String email, String pass, Set<Perfil> perfis) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.senha = senha;
+		this.pass = pass;
 		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 	
@@ -34,7 +34,7 @@ public class UserSS implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		return senha;
+		return pass;
 	}
 
 	@Override

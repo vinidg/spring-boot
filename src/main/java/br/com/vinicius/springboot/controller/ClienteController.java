@@ -51,9 +51,9 @@ public class ClienteController {
 		Cliente cliente = clienteService.findByEmail(email);
 		return ResponseEntity.ok().body(cliente);
 	}
-	
+
 	//TODO IMPLEMENTAR EDIT DE USUARIO
-	
+
 //	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 //	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
 //		Cliente obj = clienteService.fromDTO(objDto);
@@ -66,6 +66,12 @@ public class ClienteController {
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file){
 		URI uri = clienteService.uploadProfilePicture(file);
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/save-playerid", method = RequestMethod.POST)
+	public ResponseEntity<Void> savePlayerId(@RequestParam(name="player") String player){
+		clienteService.savePlayerId(player);
+		return ResponseEntity.noContent().build();
 	}
 	
 	

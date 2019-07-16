@@ -78,11 +78,26 @@ public class ClienteService {
 		
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
 		jpgImage = imageService.cropSquare(jpgImage);
-//		jpgImage = imageService.resize(jpgImage, size);
 		
 		String fileName = prefix + user.getId() + ".jpg";
 		
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), "clientes", fileName, "image");
 		
+	}
+
+	public void savePlayerId(String player) {
+		
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Optional<Cliente> cliente = repo.findById(user.getId());
+		Cliente clientePlayer = cliente.orElseThrow(() -> new ObjectNotFoundException(
+				"Cliente não encontrado! Id: " + ", Tipo: " + Cliente.class.getName()));
+		if(clientePlayer.getPlayerId() != player) {
+			clientePlayer.setPlayerId(player);
+			repo.save(clientePlayer);
+		}
 	}
 }

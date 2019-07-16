@@ -8,6 +8,7 @@ public class CredenciaisDTO implements Serializable {
 
 	private String email;
 	private String pass;
+	private String playerId;
 	
 	public CredenciaisDTO() {
 	}
@@ -25,6 +26,14 @@ public class CredenciaisDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(String playerId) {
+		this.playerId = playerId;
 	}
 	
 	
