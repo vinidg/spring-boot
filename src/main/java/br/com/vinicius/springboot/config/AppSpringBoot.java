@@ -13,9 +13,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 		"br.com.vinicius.springboot.service", "br.com.vinicius.springboot.config", "br.com.vinicius.springboot.security" })
 @EnableMongoRepositories("br.com.vinicius.springboot.repositories")
 @EntityScan("br.com.vinicius.springboot.domain")
-public class App {
+public class AppSpringBoot {
 	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
+		SpringApplication.run(AppSpringBoot.class, args);
 	}
 
 	@PostConstruct
