@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,7 +26,6 @@ import br.com.vinicius.springboot.repositories.EstadoCidadeRepository;
 import br.com.vinicius.springboot.repositories.PedidoRepository;
 import br.com.vinicius.springboot.repositories.ProdutoRepository;
 
-@Configuration
 public class Instantiation implements CommandLineRunner {
 
 	@Autowired
