@@ -18,7 +18,7 @@ public class CategoriaService {
 	private CategoriaRepository repo;
 	
 	public List<Categoria> findAll() {
-		return repo.findAll();
+		return repo.findByOrderByNome();
 	}
 	
 	public Categoria find(String id) {
